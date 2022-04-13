@@ -10,4 +10,11 @@
     <string name="menu_characters">Characters</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="rarity">Rarity</string>
+    <string name="weapon">Weapon</string>
+    <string name="vision">Vision</string>
+    <string name="birthday">Birthday</string>
+    <string name="constellation">Const.</string>
+    <string name="nation">Region</string>
+    <string name="affiliation">Affiliation</string>
 </resources>

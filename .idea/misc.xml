@@ -8,7 +8,9 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.165625" />
         <entry key="app/src/main/res/drawable/ic_menu_camera.xml" value="0.165625" />
         <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.13802083333333334" />
+        <entry key="app/src/main/res/layout/activity_character_detail.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.14947916666666666" />
+        <entry key="app/src/main/res/layout/character_detail_custom_layout.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/layout/character_item.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.2658514492753623" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2658514492753623" />
