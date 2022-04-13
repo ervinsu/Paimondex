@@ -1,4 +1,4 @@
-package com.id.ervin.genshin.paimondex.home
+package com.id.ervin.genshin.paimondex.ui
 
 import android.os.Bundle
 import android.view.Menu

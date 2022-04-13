@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.util.DisplayMetrics
 import android.view.View
+import com.id.ervin.genshin.paimondex.data.model.CharacterBriefModel
 
 fun Context.calculateNoOfColumn(widthColumnInFloat: Float): Int {
     val display: DisplayMetrics = resources.displayMetrics
@@ -12,5 +13,5 @@ fun Context.calculateNoOfColumn(widthColumnInFloat: Float): Int {
 }
 
 interface BaseRvCallback {
-    fun onItemViewClicked(position: Int, view: View, activity: Activity)
+    fun onItemViewClicked(character: CharacterBriefModel, view: View, activity: Activity)
 }

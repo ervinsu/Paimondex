@@ -1,15 +1,17 @@
-package com.id.ervin.genshin.paimondex.home.ui.characters
+package com.id.ervin.genshin.paimondex.ui.fragment.characters
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.id.ervin.genshin.paimondex.R
+import com.id.ervin.genshin.paimondex.data.model.CharacterBriefModel
 import com.id.ervin.genshin.paimondex.databinding.FragmentCharactersBinding
+import com.id.ervin.genshin.paimondex.ui.CharacterDetailActivity
 import com.id.ervin.genshin.paimondex.util.BaseRvCallback
 import com.id.ervin.genshin.paimondex.util.calculateNoOfColumn
 import com.id.ervin.genshin.paimondex.util.gone
@@ -68,8 +70,11 @@ class CharactersFragment : ScopeFragment(), BaseRvCallback {
         _binding = null
     }
 
-    override fun onItemViewClicked(position: Int, view: View, activity: Activity) {
-        Snackbar.make(view, "$position $view $activity", Snackbar.LENGTH_LONG)
-            .setAction("Action", null).show()
+    override fun onItemViewClicked(character: CharacterBriefModel, view: View, activity: Activity) {
+        val intent = Intent(activity, CharacterDetailActivity::class.java).apply {
+            putExtra(CharacterDetailActivity.CHARACTER_EXTRA, character)
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+        activity.startActivity(intent)
     }
 }

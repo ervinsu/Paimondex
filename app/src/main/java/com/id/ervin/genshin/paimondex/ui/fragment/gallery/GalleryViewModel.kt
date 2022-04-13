@@ -1,4 +1,4 @@
-package com.id.ervin.genshin.paimondex.home.ui.gallery
+package com.id.ervin.genshin.paimondex.ui.fragment.gallery
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

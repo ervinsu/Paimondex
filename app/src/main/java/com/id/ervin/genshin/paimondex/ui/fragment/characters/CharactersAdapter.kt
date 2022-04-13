@@ -1,4 +1,4 @@
-package com.id.ervin.genshin.paimondex.home.ui.characters
+package com.id.ervin.genshin.paimondex.ui.fragment.characters
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -44,7 +44,7 @@ class CharactersAdapter(private val listener: BaseRvCallback) :
                 return@onClick
             }
             mLastClickTime = SystemClock.elapsedRealtime()
-            listener.onItemViewClicked(position, view, activity)
+            listener.onItemViewClicked(listCharacter[position], view, activity)
         }
     }
 

@@ -1,4 +1,4 @@
-package com.id.ervin.genshin.paimondex.home.ui.characters
+package com.id.ervin.genshin.paimondex.ui.fragment.characters
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

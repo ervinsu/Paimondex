@@ -1,4 +1,4 @@
-package com.id.ervin.genshin.paimondex.home.ui.gallery
+package com.id.ervin.genshin.paimondex.ui.fragment.slideshow
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.id.ervin.genshin.paimondex.databinding.FragmentGalleryBinding
+import com.id.ervin.genshin.paimondex.databinding.FragmentSlideshowBinding
 
-class GalleryFragment : Fragment() {
+class SlideshowFragment : Fragment() {
 
-    private lateinit var galleryViewModel: GalleryViewModel
-    private var _binding: FragmentGalleryBinding? = null
+    private lateinit var slideshowViewModel: SlideshowViewModel
+    private var _binding: FragmentSlideshowBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -23,14 +23,14 @@ class GalleryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        galleryViewModel =
-            ViewModelProvider(this).get(GalleryViewModel::class.java)
+        slideshowViewModel =
+            ViewModelProvider(this).get(SlideshowViewModel::class.java)
 
-        _binding = FragmentGalleryBinding.inflate(inflater, container, false)
+        _binding = FragmentSlideshowBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textGallery
-        galleryViewModel.text.observe(viewLifecycleOwner, {
+        val textView: TextView = binding.textSlideshow
+        slideshowViewModel.text.observe(viewLifecycleOwner, {
             textView.text = it
         })
         return root

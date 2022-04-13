@@ -1,4 +1,4 @@
-package com.id.ervin.genshin.paimondex.home.ui.characters
+package com.id.ervin.genshin.paimondex.ui.fragment.characters
 
 import com.id.ervin.genshin.paimondex.data.model.CharacterBriefModel
 import com.id.ervin.genshin.paimondex.di.BASE_URL
