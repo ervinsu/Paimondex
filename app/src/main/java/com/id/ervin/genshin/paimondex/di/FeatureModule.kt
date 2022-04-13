@@ -1,5 +1,6 @@
 package com.id.ervin.genshin.paimondex.di
 
+import com.id.ervin.genshin.paimondex.ui.CharacterDetailViewModel
 import com.id.ervin.genshin.paimondex.ui.fragment.characters.CharactersAdapter
 import com.id.ervin.genshin.paimondex.ui.fragment.characters.CharactersFragment
 import com.id.ervin.genshin.paimondex.ui.fragment.characters.CharactersViewModel
@@ -15,4 +16,8 @@ val charactersFeatureModule = module {
             CharactersAdapter(action)
         }
     }
+}
+
+val characterDetailFeatureModule = module {
+    viewModel { CharacterDetailViewModel(get()) }
 }

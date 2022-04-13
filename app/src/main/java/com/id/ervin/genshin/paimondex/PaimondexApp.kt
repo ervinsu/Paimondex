@@ -1,6 +1,7 @@
 package com.id.ervin.genshin.paimondex
 
 import android.app.Application
+import com.id.ervin.genshin.paimondex.di.characterDetailFeatureModule
 import com.id.ervin.genshin.paimondex.di.characterRepositoryModule
 import com.id.ervin.genshin.paimondex.di.charactersFeatureModule
 import com.id.ervin.genshin.paimondex.di.remoteModule
@@ -20,6 +21,7 @@ class PaimondexApp : Application() {
             listModules.add(remoteModule)
             listModules.add(characterRepositoryModule)
             listModules.add(charactersFeatureModule)
+            listModules.add(characterDetailFeatureModule)
             modules(
                 listModules
             )

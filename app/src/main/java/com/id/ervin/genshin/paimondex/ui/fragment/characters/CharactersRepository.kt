@@ -1,6 +1,7 @@
 package com.id.ervin.genshin.paimondex.ui.fragment.characters
 
 import com.id.ervin.genshin.paimondex.data.model.CharacterBriefModel
+import com.id.ervin.genshin.paimondex.data.state.CharDetailState
 import com.id.ervin.genshin.paimondex.di.BASE_URL
 import com.id.ervin.genshin.paimondex.network.GenshinApiService
 import kotlinx.coroutines.Dispatchers
@@ -19,4 +20,20 @@ class CharactersRepository(
             )
         }
     }
+
+    suspend fun getDetailCharacter(charName: String): CharDetailState =
+        withContext(Dispatchers.IO) {
+            try {
+                val imageCardUrl = "$BASE_URL/characters/$charName/card"
+                val characterDto = genshinApiService.getCharacterDetail(charName)
+                CharDetailState(
+                    isLoading = false,
+                    isConnectionError = false,
+                    characterDto.toModel(imageCardUrl)
+                )
+            } catch (e: Exception) {
+                // TODO add log
+                CharDetailState(isLoading = false, isConnectionError = true)
+            }
+        }
 }

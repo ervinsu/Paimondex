@@ -50,7 +50,7 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.1"
+                android:layout_weight="1.2"
                 android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView

@@ -14,7 +14,7 @@
     <string name="weapon">Weapon</string>
     <string name="vision">Vision</string>
     <string name="birthday">Birthday</string>
-    <string name="constellation">Const.</string>
+    <string name="constellation">Constellation</string>
     <string name="nation">Region</string>
     <string name="affiliation">Affiliation</string>
 </resources>

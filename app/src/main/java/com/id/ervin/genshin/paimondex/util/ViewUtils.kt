@@ -4,7 +4,9 @@ import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
+import com.id.ervin.genshin.paimondex.R
 
 fun View.gone() {
     this.visibility = View.GONE
@@ -24,6 +26,9 @@ fun <T : RecyclerView.ViewHolder> T.onClick(action: (position: Int, view: View) 
 fun ImageView.loadImage(url: String) {
     Glide.with(context)
         .load(url)
+        .apply(
+            RequestOptions.placeholderOf(R.drawable.paimon_loading).error(R.drawable.paimon_failed)
+        )
         .into(this)
 }
 
