@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Paimondex">
         <activity
+            android:theme="@style/Theme.Paimondex.NoActionBar"
             android:name=".ui.feature.characters.detail.CharacterDetailActivity"
             android:exported="true" />
         <activity

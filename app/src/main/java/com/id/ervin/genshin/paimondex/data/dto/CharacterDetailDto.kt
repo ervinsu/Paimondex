@@ -21,7 +21,7 @@ data class CharacterDetailDto(
     fun toModel(imageCardUrl: String): CharacterDetailModel {
         return CharacterDetailModel(
             name,
-            element.name,
+            element,
             weaponType,
             nation,
             affiliation,

@@ -4,7 +4,7 @@ import com.id.ervin.genshin.paimondex.data.enum.Element
 
 data class CharacterDetailModel(
     val name: String = "",
-    val element: String = Element.None.name,
+    val element: Element = Element.None,
     val weaponType: String = "",
     val region: String = "",
     val affiliation: String = "",
