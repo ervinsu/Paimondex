@@ -1,11 +1,11 @@
-package com.id.ervin.genshin.paimondex.ui
+package com.id.ervin.genshin.paimondex.ui.feature.characters.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.id.ervin.genshin.paimondex.data.state.CharDetailState
-import com.id.ervin.genshin.paimondex.ui.fragment.characters.CharactersRepository
+import com.id.ervin.genshin.paimondex.ui.feature.characters.CharactersRepository
 import kotlinx.coroutines.launch
 
 class CharacterDetailViewModel(private val repository: CharactersRepository) : ViewModel() {

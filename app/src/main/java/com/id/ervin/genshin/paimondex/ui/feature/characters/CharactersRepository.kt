@@ -1,4 +1,4 @@
-package com.id.ervin.genshin.paimondex.ui.fragment.characters
+package com.id.ervin.genshin.paimondex.ui.feature.characters
 
 import com.id.ervin.genshin.paimondex.data.model.CharacterBriefModel
 import com.id.ervin.genshin.paimondex.data.state.CharDetailState

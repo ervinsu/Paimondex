@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Paimondex">
         <activity
-            android:name=".ui.CharacterDetailActivity"
+            android:name=".ui.feature.characters.detail.CharacterDetailActivity"
             android:exported="true" />
         <activity
             android:name=".ui.MainActivity"

@@ -1,4 +1,4 @@
-package com.id.ervin.genshin.paimondex.ui
+package com.id.ervin.genshin.paimondex.ui.feature.characters.detail
 
 import android.os.Bundle
 import android.view.View

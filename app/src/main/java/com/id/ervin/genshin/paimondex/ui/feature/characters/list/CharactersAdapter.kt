@@ -1,4 +1,4 @@
-package com.id.ervin.genshin.paimondex.ui.fragment.characters
+package com.id.ervin.genshin.paimondex.ui.feature.characters.list
 
 import android.annotation.SuppressLint
 import android.app.Activity

@@ -1,4 +1,4 @@
-package com.id.ervin.genshin.paimondex.ui.fragment.gallery
+package com.id.ervin.genshin.paimondex.ui.feature.gallery
 
 import android.os.Bundle
 import android.view.LayoutInflater

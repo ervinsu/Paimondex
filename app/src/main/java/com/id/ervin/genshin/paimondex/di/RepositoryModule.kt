@@ -1,6 +1,6 @@
 package com.id.ervin.genshin.paimondex.di
 
-import com.id.ervin.genshin.paimondex.ui.fragment.characters.CharactersRepository
+import com.id.ervin.genshin.paimondex.ui.feature.characters.CharactersRepository
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 

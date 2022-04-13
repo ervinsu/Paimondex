@@ -1,4 +1,4 @@
-package com.id.ervin.genshin.paimondex.ui.fragment.characters
+package com.id.ervin.genshin.paimondex.ui.feature.characters.list
 
 import android.app.Activity
 import android.content.Intent
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.id.ervin.genshin.paimondex.R
 import com.id.ervin.genshin.paimondex.data.model.CharacterBriefModel
 import com.id.ervin.genshin.paimondex.databinding.FragmentCharactersBinding
-import com.id.ervin.genshin.paimondex.ui.CharacterDetailActivity
+import com.id.ervin.genshin.paimondex.ui.feature.characters.detail.CharacterDetailActivity
 import com.id.ervin.genshin.paimondex.util.BaseRvCallback
 import com.id.ervin.genshin.paimondex.util.calculateNoOfColumn
 import com.id.ervin.genshin.paimondex.util.gone
