@@ -17,4 +17,6 @@
     <string name="constellation">Constellation</string>
     <string name="nation">Region</string>
     <string name="affiliation">Affiliation</string>
+    <string name="paimon_error_message">Sorry Traveler, something is wrong.</string>
+    <string name="retry">Retry</string>
 </resources>

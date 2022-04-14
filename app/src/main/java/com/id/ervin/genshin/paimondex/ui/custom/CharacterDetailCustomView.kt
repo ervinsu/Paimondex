@@ -8,7 +8,7 @@ import com.id.ervin.genshin.paimondex.R
 import com.id.ervin.genshin.paimondex.databinding.CharacterDetailCustomViewBinding
 
 
-class CharacterCustomDetailView @JvmOverloads constructor(
+class CharacterDetailCustomView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
@@ -23,11 +23,11 @@ class CharacterCustomDetailView @JvmOverloads constructor(
     init {
         val typedArray = context.obtainStyledAttributes(
             attrs,
-            R.styleable.CharacterCustomDetailView,
+            R.styleable.CharacterDetailCustomView,
             defStyle,
             0
         )
-        val variable = typedArray.getString(R.styleable.CharacterCustomDetailView_variable) ?: ""
+        val variable = typedArray.getString(R.styleable.CharacterDetailCustomView_variable) ?: ""
         binding.textVariable.text = variable
         typedArray.recycle()
     }

@@ -13,10 +13,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scrollView_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detail_toolbar">
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/detail_toolbar"
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -132,7 +135,7 @@
                     </androidx.appcompat.widget.LinearLayoutCompat>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <com.id.ervin.genshin.paimondex.ui.custom.CharacterCustomDetailView
+                <com.id.ervin.genshin.paimondex.ui.custom.CharacterDetailCustomView
                     android:id="@+id/customView_birthday"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -142,7 +145,7 @@
                     app:layout_constraintTop_toBottomOf="@id/layout_rarity"
                     app:variable="@string/birthday" />
 
-                <com.id.ervin.genshin.paimondex.ui.custom.CharacterCustomDetailView
+                <com.id.ervin.genshin.paimondex.ui.custom.CharacterDetailCustomView
                     android:id="@+id/customView_consName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -153,7 +156,7 @@
                     app:variable="@string/constellation" />
 
 
-                <com.id.ervin.genshin.paimondex.ui.custom.CharacterCustomDetailView
+                <com.id.ervin.genshin.paimondex.ui.custom.CharacterDetailCustomView
                     android:id="@+id/customView_nation"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -163,7 +166,7 @@
                     app:layout_constraintTop_toBottomOf="@id/customView_consName"
                     app:variable="@string/nation" />
 
-                <com.id.ervin.genshin.paimondex.ui.custom.CharacterCustomDetailView
+                <com.id.ervin.genshin.paimondex.ui.custom.CharacterDetailCustomView
                     android:id="@+id/customView_affiliation"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -187,5 +190,21 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <com.id.ervin.genshin.paimondex.ui.custom.InternetErrorCustomView
+        android:id="@+id/customView_internet_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/pb_character_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

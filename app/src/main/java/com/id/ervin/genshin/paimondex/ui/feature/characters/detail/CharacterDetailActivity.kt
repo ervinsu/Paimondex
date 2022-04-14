@@ -9,13 +9,16 @@ import com.id.ervin.genshin.paimondex.R
 import com.id.ervin.genshin.paimondex.data.model.CharacterBriefModel
 import com.id.ervin.genshin.paimondex.databinding.ActivityCharacterDetailBinding
 import com.id.ervin.genshin.paimondex.util.generateTransition
+import com.id.ervin.genshin.paimondex.util.gone
 import com.id.ervin.genshin.paimondex.util.loadImage
+import com.id.ervin.genshin.paimondex.util.visible
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class CharacterDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCharacterDetailBinding
     private lateinit var view: View
     private val charDetailViewModel: CharacterDetailViewModel by viewModel()
+    private lateinit var characterName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,30 +26,42 @@ class CharacterDetailActivity : AppCompatActivity() {
         view = binding.root
         setContentView(view)
 
-        val character = intent.getParcelableExtra<CharacterBriefModel>(CHARACTER_EXTRA) ?: return
-        initCharacterObserver(character.name)
+        characterName =
+            intent.getParcelableExtra<CharacterBriefModel>(CHARACTER_EXTRA)?.name ?: return
+        initCharacterObserver(characterName)
         initToolbar()
+        initBinding(characterName)
+    }
+
+    private fun initBinding(characterName: String) {
+        binding.customViewInternetError.setRetryAction {
+            charDetailViewModel.retryState(characterName)
+        }
     }
 
     private fun initCharacterObserver(characterName: String) {
         charDetailViewModel.detailState.observe(this, { state ->
-            if (state.isLoading) {
-                // Set progress bar
+            if (state.isConnectionError) {
+                binding.customViewInternetError.visible()
+                binding.pbCharacterDetail.gone()
                 return@observe
             } else {
-                // set progress bar
+                binding.customViewInternetError.gone()
+                if (state.isLoading) {
+                    binding.pbCharacterDetail.visible()
+                    return@observe
+                } else {
+                    binding.pbCharacterDetail.gone()
+                }
             }
-            if (state.isConnectionError) {
-                // Show error
-                return@observe
-            }
+
+            binding.nestedScrollViewContent.visible()
             val character = state.character
 
             character.apply {
                 val birthday = if (birthday.isNotEmpty())
                     birthday.substring(5, birthday.count())
-                else
-                    "-"
+                else "-"
 
                 binding.textDescription.text = description
                 binding.ratingRarity.rating = rarity.toFloat()

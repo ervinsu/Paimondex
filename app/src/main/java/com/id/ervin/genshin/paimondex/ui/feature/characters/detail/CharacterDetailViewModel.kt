@@ -12,6 +12,11 @@ class CharacterDetailViewModel(private val repository: CharactersRepository) : V
     private val _detailState = MutableLiveData<CharDetailState>()
     val detailState: LiveData<CharDetailState> = _detailState
 
+    fun retryState(charName: String) {
+        _detailState.value = CharDetailState(isLoading = true, isConnectionError = false)
+        fetchCharacterDetail(charName)
+    }
+
     fun fetchCharacterDetail(charName: String) {
         viewModelScope.launch {
             _detailState.value = repository.getDetailCharacter(charName)

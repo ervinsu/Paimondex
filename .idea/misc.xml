@@ -15,6 +15,7 @@
         <entry key="app/src/main/res/layout/character_item.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.2658514492753623" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2658514492753623" />
+        <entry key="app/src/main/res/layout/internet_error_custom_view.xml" value="0.1" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.2658514492753623" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.26927083333333335" />
         <entry key="app/src/main/res/menu/main.xml" value="0.26927083333333335" />

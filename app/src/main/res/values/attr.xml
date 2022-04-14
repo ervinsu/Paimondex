@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="CharacterCustomDetailView">
+    <declare-styleable name="CharacterDetailCustomView">
         <attr name="variable" format="string" />
     </declare-styleable>
 </resources>
