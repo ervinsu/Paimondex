@@ -1,11 +1,10 @@
 package com.id.ervin.genshin.paimondex.data.model
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import com.id.ervin.genshin.paimondex.di.BASE_URL
 
-@Parcelize
 data class CharacterBriefModel(
     val name: String = "",
-    val pictureUrl: String = "",
     val isFavorite: Boolean = false
-) : Parcelable
+) {
+    val pictureUrl: String = "$BASE_URL/characters/${name.lowercase()}/icon"
+}

@@ -20,7 +20,7 @@ class CharacterDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCharacterDetailBinding
     private lateinit var view: View
     private val charDetailViewModel: CharacterDetailViewModel by viewModel()
-    private lateinit var characterBriefModel: CharacterBriefModel
+    private var characterBriefModel = CharacterBriefModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,12 +28,11 @@ class CharacterDetailActivity : AppCompatActivity() {
         view = binding.root
         setContentView(view)
         initToolbar()
-
-        characterBriefModel =
-            intent.getParcelableExtra<CharacterBriefModel>(CHARACTER_EXTRA)?.apply {
-                initCharacterObserver(name)
-                initBinding(name)
-            } ?: return
+        intent.getStringExtra(CHARACTER_EXTRA)?.apply {
+            initDetailCharacterObserver(this)
+            initBinding(this)
+            initFavoriteCharacterObserver(this)
+        } ?: return
     }
 
     private fun initBinding(characterName: String) {
@@ -42,7 +41,16 @@ class CharacterDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun initCharacterObserver(characterName: String) {
+    private fun initFavoriteCharacterObserver(characterName: String) {
+        charDetailViewModel.character.observe(this, {
+            characterBriefModel = it
+            setBookmark(it)
+        })
+        charDetailViewModel.getCharacter(characterName)
+
+    }
+
+    private fun initDetailCharacterObserver(characterName: String) {
         charDetailViewModel.detailState.observe(this, { state ->
             if (state.isConnectionError) {
                 binding.customViewInternetError.visible()
@@ -113,8 +121,10 @@ class CharacterDetailActivity : AppCompatActivity() {
             R.id.action_bookmark -> {
                 characterBriefModel = characterBriefModel.copy(
                     isFavorite = !characterBriefModel.isFavorite
-                )
-                setBookmark(characterBriefModel)
+                ).apply {
+                    charDetailViewModel.saveOrUpdateCharacter(name, isFavorite)
+                    setBookmark(this)
+                }
             }
         }
         return true

@@ -23,9 +23,10 @@ data class CharacterDetailDto(
     val constellations: List<CharacterTalentModel> = listOf(),
 
     ) {
-    fun toModel(imageCardUrl: String): CharacterDetailModel {
+    fun toModel(simpleName: String): CharacterDetailModel {
         return CharacterDetailModel(
             name,
+            simpleName,
             element,
             weaponType,
             nation,
@@ -34,7 +35,6 @@ data class CharacterDetailDto(
             rarity,
             constellationName,
             description,
-            imageCardUrl,
             skillTalents + passiveTalents,
             constellations
         )

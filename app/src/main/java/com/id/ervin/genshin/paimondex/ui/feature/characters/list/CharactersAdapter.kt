@@ -44,7 +44,7 @@ class CharactersAdapter(private val listener: BaseRvCallback) :
                 return@onClick
             }
             mLastClickTime = SystemClock.elapsedRealtime()
-            listener.onItemViewClicked(listCharacter[position], view, activity)
+            listener.onItemViewClicked(listCharacter[position].name, view, activity)
         }
     }
 

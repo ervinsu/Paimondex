@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.GridLayoutManager
 import com.id.ervin.genshin.paimondex.R
-import com.id.ervin.genshin.paimondex.data.model.CharacterBriefModel
 import com.id.ervin.genshin.paimondex.databinding.FragmentCharactersBinding
 import com.id.ervin.genshin.paimondex.ui.feature.characters.detail.CharacterDetailActivity
 import com.id.ervin.genshin.paimondex.util.BaseRvCallback
@@ -70,9 +69,9 @@ class CharactersFragment : ScopeFragment(), BaseRvCallback {
         _binding = null
     }
 
-    override fun onItemViewClicked(character: CharacterBriefModel, view: View, activity: Activity) {
+    override fun onItemViewClicked(charName: String, view: View, activity: Activity) {
         val intent = Intent(activity, CharacterDetailActivity::class.java).apply {
-            putExtra(CharacterDetailActivity.CHARACTER_EXTRA, character)
+            putExtra(CharacterDetailActivity.CHARACTER_EXTRA, charName)
             flags = Intent.FLAG_ACTIVITY_NEW_TASK
         }
         activity.startActivity(intent)

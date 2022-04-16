@@ -6,6 +6,8 @@ import org.koin.dsl.module
 
 val characterRepositoryModule = module {
     single {
-        CharactersRepository(get(named("genshinApiService")))
+        CharactersRepository(
+            get(named("genshinApiService")), get(named("genshinLocalService"))
+        )
     }
 }

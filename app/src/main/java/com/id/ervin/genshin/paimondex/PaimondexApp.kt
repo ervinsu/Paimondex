@@ -4,6 +4,7 @@ import android.app.Application
 import com.id.ervin.genshin.paimondex.di.characterDetailFeatureModule
 import com.id.ervin.genshin.paimondex.di.characterRepositoryModule
 import com.id.ervin.genshin.paimondex.di.charactersFeatureModule
+import com.id.ervin.genshin.paimondex.di.dbModule
 import com.id.ervin.genshin.paimondex.di.remoteModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -19,6 +20,7 @@ class PaimondexApp : Application() {
             androidContext(this@PaimondexApp)
             val listModules = mutableListOf<Module>()
             listModules.add(remoteModule)
+            listModules.add(dbModule)
             listModules.add(characterRepositoryModule)
             listModules.add(charactersFeatureModule)
             listModules.add(characterDetailFeatureModule)

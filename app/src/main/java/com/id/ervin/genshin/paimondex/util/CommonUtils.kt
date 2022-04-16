@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.TransitionDrawable
 import android.util.DisplayMetrics
 import android.view.View
-import com.id.ervin.genshin.paimondex.data.model.CharacterBriefModel
 
 fun Context.calculateNoOfColumn(widthColumnInFloat: Float): Int {
     val display: DisplayMetrics = resources.displayMetrics
@@ -16,7 +15,7 @@ fun Context.calculateNoOfColumn(widthColumnInFloat: Float): Int {
 }
 
 interface BaseRvCallback {
-    fun onItemViewClicked(character: CharacterBriefModel, view: View, activity: Activity)
+    fun onItemViewClicked(charName: String, view: View, activity: Activity)
 }
 
 fun generateTransition(fromColor: Int, toColor: Int): TransitionDrawable {
