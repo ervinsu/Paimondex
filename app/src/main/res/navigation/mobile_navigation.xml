@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_characters" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.id.ervin.genshin.paimondex.ui.feature.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_about"
+        android:name="com.id.ervin.genshin.paimondex.ui.feature.about.AboutFragment"
+        android:label="@string/menu_about"
+        tools:layout="@layout/fragment_about" />
 </navigation>

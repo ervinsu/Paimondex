@@ -13,8 +13,8 @@
             android:icon="@drawable/ic_bookmark"
             android:title="@string/menu_favorite" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_about"
+            android:title="@string/menu_about" />
     </group>
 </menu>
