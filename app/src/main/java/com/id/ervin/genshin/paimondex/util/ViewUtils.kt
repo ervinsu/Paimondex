@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
 import com.id.ervin.genshin.paimondex.R
+import com.id.ervin.genshin.paimondex.data.state.LoadingState
 
 fun View.gone() {
     this.visibility = View.GONE
@@ -34,4 +35,27 @@ fun ImageView.loadImage(url: String) {
 
 fun View.createSnackBar(text: String, snackBarLength: Int) {
     Snackbar.make(this, text, snackBarLength).show()
+}
+
+fun showContentIfNotLoadingAndNotError(
+    loadingState: LoadingState,
+    contentView: View,
+    loadingView: View,
+    errorView: View
+) {
+    contentView.gone()
+    if (loadingState.isConnectionError) {
+        errorView.visible()
+        loadingView.gone()
+        return
+    } else {
+        errorView.gone()
+        if (loadingState.isLoading) {
+            loadingView.visible()
+            return
+        } else {
+            loadingView.gone()
+        }
+    }
+    contentView.visible()
 }

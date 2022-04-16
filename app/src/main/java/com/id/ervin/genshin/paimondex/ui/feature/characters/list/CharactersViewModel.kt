@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.id.ervin.genshin.paimondex.data.state.CharactersState
+import com.id.ervin.genshin.paimondex.data.state.LoadingState
 import com.id.ervin.genshin.paimondex.ui.feature.characters.CharactersRepository
 import kotlinx.coroutines.launch
 
@@ -18,7 +19,8 @@ class CharactersViewModel(
 
     fun getCharacters() {
         viewModelScope.launch {
-            _charactersState.value = CharactersState(false, repository.getRemoteBriefCharacters())
+            _charactersState.value = CharactersState(LoadingState(isLoading = true))
+            _charactersState.value = repository.getRemoteBriefCharacters()
         }
     }
 }

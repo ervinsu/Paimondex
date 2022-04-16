@@ -3,6 +3,7 @@ package com.id.ervin.genshin.paimondex.ui.feature.characters
 import com.id.ervin.genshin.paimondex.data.entity.CharacterBriefEntity
 import com.id.ervin.genshin.paimondex.data.model.CharacterBriefModel
 import com.id.ervin.genshin.paimondex.data.state.CharDetailState
+import com.id.ervin.genshin.paimondex.data.state.CharactersState
 import com.id.ervin.genshin.paimondex.data.state.FavoriteState
 import com.id.ervin.genshin.paimondex.data.state.LoadingState
 import com.id.ervin.genshin.paimondex.db.GenshinLocalService
@@ -13,6 +14,7 @@ import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.supervisorScope
 import kotlinx.coroutines.withContext
 
 class CharactersRepository(
@@ -20,22 +22,32 @@ class CharactersRepository(
     private val genshinLocalService: GenshinLocalService
 ) {
 
-    suspend fun getRemoteBriefCharacters(): List<CharacterBriefModel> =
+    suspend fun getRemoteBriefCharacters(): CharactersState =
         withContext(Dispatchers.IO) {
-            val listRemoteCharacterDeferred = async { genshinApiService.getCharacters() }
-            val listLocalCharacterDeferred =
-                async { genshinLocalService.getAllFavoriteCharacters() }
+            supervisorScope { // Use  supervisor job since we using async to fetch data
+                val listRemoteCharacterDeferred = async { genshinApiService.getCharacters() }
+                val listLocalCharacterDeferred =
+                    async { genshinLocalService.getAllFavoriteCharacters() }
 
-            val listChars = listRemoteCharacterDeferred.await()
-            val listLocalChars = listLocalCharacterDeferred.await().first()
+                try {
+                    val listChars = listRemoteCharacterDeferred.await()
+                    val listLocalChars = listLocalCharacterDeferred.await().first()
 
-            listChars.map { charName ->
-                val isFavoriteCharacter = listLocalChars.firstOrNull { it.name == charName } != null
-                CharacterBriefModel(
-                    name = charName,
-                    isFavorite = isFavoriteCharacter
-                )
+                    val listOfBriefCharModel = listChars.map { charName ->
+                        val isFavoriteCharacter =
+                            listLocalChars.firstOrNull { it.name == charName } != null
+                        CharacterBriefModel(
+                            name = charName,
+                            isFavorite = isFavoriteCharacter
+                        )
+                    }
+                    CharactersState(LoadingState(), listOfBriefCharModel)
+                } catch (e: Exception) {
+                    // TODO LOG
+                    CharactersState(LoadingState(isConnectionError = true))
+                }
             }
+
         }
 
     fun getLocalBriefCharacters() = flow {
@@ -85,13 +97,12 @@ class CharactersRepository(
             try {
                 val characterDto = genshinApiService.getCharacterDetail(charName)
                 CharDetailState(
-                    isLoading = false,
-                    isConnectionError = false,
+                    LoadingState(),
                     characterDto.toModel(charName)
                 )
             } catch (e: Exception) {
                 // TODO add log
-                CharDetailState(isLoading = false, isConnectionError = true)
+                CharDetailState(LoadingState(isConnectionError = true))
             }
         }
 }

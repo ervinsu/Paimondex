@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.id.ervin.genshin.paimondex.data.model.CharacterBriefModel
 import com.id.ervin.genshin.paimondex.data.state.CharDetailState
+import com.id.ervin.genshin.paimondex.data.state.LoadingState
 import com.id.ervin.genshin.paimondex.ui.feature.characters.CharactersRepository
 import kotlinx.coroutines.launch
 
@@ -17,7 +18,7 @@ class CharacterDetailViewModel(private val repository: CharactersRepository) : V
     val character: LiveData<CharacterBriefModel> = _character
 
     fun retryState(charName: String) {
-        _detailState.value = CharDetailState(isLoading = true, isConnectionError = false)
+        _detailState.value = CharDetailState(LoadingState(isLoading = true))
         fetchCharacterDetail(charName)
     }
 

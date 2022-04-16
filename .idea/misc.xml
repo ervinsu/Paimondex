@@ -18,6 +18,7 @@
         <entry key="app/src/main/res/layout/character_skill_custom_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/character_talent_custom_view.xml" value="0.13020833333333334" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.2658514492753623" />
+        <entry key="app/src/main/res/layout/fragment_characters.xml" value="0.15" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.15" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2658514492753623" />
         <entry key="app/src/main/res/layout/internet_error_custom_view.xml" value="0.1" />

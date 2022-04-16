@@ -6,15 +6,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import androidx.recyclerview.widget.GridLayoutManager
 import com.id.ervin.genshin.paimondex.R
 import com.id.ervin.genshin.paimondex.databinding.FragmentCharactersBinding
 import com.id.ervin.genshin.paimondex.ui.feature.characters.detail.CharacterDetailActivity
 import com.id.ervin.genshin.paimondex.util.BaseRvCallback
 import com.id.ervin.genshin.paimondex.util.calculateNoOfColumn
-import com.id.ervin.genshin.paimondex.util.gone
-import com.id.ervin.genshin.paimondex.util.visible
+import com.id.ervin.genshin.paimondex.util.showContentIfNotLoadingAndNotError
 import org.koin.android.scope.ScopeFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -43,6 +41,7 @@ class CharactersFragment : ScopeFragment(), BaseRvCallback {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerview()
         initObserver()
+        initRetryOnError()
         charactersViewModel.getCharacters()
     }
 
@@ -57,11 +56,22 @@ class CharactersFragment : ScopeFragment(), BaseRvCallback {
     }
 
     private fun initObserver() {
-        val progressBar: ProgressBar = binding.pbLoading
         charactersViewModel.charactersState.observe(viewLifecycleOwner, { homeState ->
-            if (homeState.isLoading) progressBar.visible() else progressBar.gone()
+            showContentIfNotLoadingAndNotError(
+                homeState.loadingState,
+                binding.rvCharacters,
+                binding.pbLoading,
+                binding.customViewInternetError
+            )
+            if (homeState.characters.isEmpty()) return@observe
             adapter.setCharacters(homeState.characters)
         })
+    }
+
+    private fun initRetryOnError() {
+        binding.customViewInternetError.setRetryAction {
+            charactersViewModel.getCharacters()
+        }
     }
 
     override fun onDestroyView() {

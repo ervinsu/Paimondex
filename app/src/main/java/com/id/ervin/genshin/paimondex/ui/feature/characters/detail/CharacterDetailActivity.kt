@@ -11,9 +11,8 @@ import com.id.ervin.genshin.paimondex.R
 import com.id.ervin.genshin.paimondex.data.model.CharacterBriefModel
 import com.id.ervin.genshin.paimondex.databinding.ActivityCharacterDetailBinding
 import com.id.ervin.genshin.paimondex.util.generateTransition
-import com.id.ervin.genshin.paimondex.util.gone
 import com.id.ervin.genshin.paimondex.util.loadImage
-import com.id.ervin.genshin.paimondex.util.visible
+import com.id.ervin.genshin.paimondex.util.showContentIfNotLoadingAndNotError
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class CharacterDetailActivity : AppCompatActivity() {
@@ -30,12 +29,12 @@ class CharacterDetailActivity : AppCompatActivity() {
         initToolbar()
         intent.getStringExtra(CHARACTER_EXTRA)?.apply {
             initDetailCharacterObserver(this)
-            initBinding(this)
+            initRetryOnError(this)
             initFavoriteCharacterObserver(this)
         } ?: return
     }
 
-    private fun initBinding(characterName: String) {
+    private fun initRetryOnError(characterName: String) {
         binding.customViewInternetError.setRetryAction {
             charDetailViewModel.retryState(characterName)
         }
@@ -52,21 +51,14 @@ class CharacterDetailActivity : AppCompatActivity() {
 
     private fun initDetailCharacterObserver(characterName: String) {
         charDetailViewModel.detailState.observe(this, { state ->
-            if (state.isConnectionError) {
-                binding.customViewInternetError.visible()
-                binding.pbCharacterDetail.gone()
-                return@observe
-            } else {
-                binding.customViewInternetError.gone()
-                if (state.isLoading) {
-                    binding.pbCharacterDetail.visible()
-                    return@observe
-                } else {
-                    binding.pbCharacterDetail.gone()
-                }
-            }
+            showContentIfNotLoadingAndNotError(
+                state.loadingState,
+                binding.nestedScrollViewContent,
+                binding.pbCharacterDetail,
+                binding.customViewInternetError
+            )
+            if (state.character.name.isEmpty()) return@observe
 
-            binding.nestedScrollViewContent.visible()
             val character = state.character
 
             character.apply {
