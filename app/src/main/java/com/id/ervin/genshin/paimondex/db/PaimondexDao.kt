@@ -12,9 +12,9 @@ interface PaimondexDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavoriteCharacter(character: CharacterBriefEntity)
 
-    @Query("SELECT * FROM character")
-    fun getAllCharacters(): Flow<List<CharacterBriefEntity>>
+    @Query("SELECT * FROM character WHERE isFavorite=1")
+    fun getAllFavoriteCharacters(): Flow<List<CharacterBriefEntity>>
 
     @Query("SELECT * FROM character WHERE name = :input")
-    fun getCharacter(input: String): Flow<CharacterBriefEntity?>
+    fun getFavoriteCharacter(input: String): Flow<CharacterBriefEntity?>
 }

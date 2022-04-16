@@ -5,6 +5,7 @@ import com.id.ervin.genshin.paimondex.di.characterDetailFeatureModule
 import com.id.ervin.genshin.paimondex.di.characterRepositoryModule
 import com.id.ervin.genshin.paimondex.di.charactersFeatureModule
 import com.id.ervin.genshin.paimondex.di.dbModule
+import com.id.ervin.genshin.paimondex.di.favoriteCharacterFeatureModule
 import com.id.ervin.genshin.paimondex.di.remoteModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -23,6 +24,7 @@ class PaimondexApp : Application() {
             listModules.add(dbModule)
             listModules.add(characterRepositoryModule)
             listModules.add(charactersFeatureModule)
+            listModules.add(favoriteCharacterFeatureModule)
             listModules.add(characterDetailFeatureModule)
             modules(
                 listModules

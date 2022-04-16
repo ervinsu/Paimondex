@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_characters" />
 
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/nav_favorite"
         android:name="com.id.ervin.genshin.paimondex.ui.feature.characters.favorite.FavoriteFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:label="@string/menu_favorite"
+        tools:layout="@layout/fragment_characters" />
 
     <fragment
         android:id="@+id/nav_slideshow"

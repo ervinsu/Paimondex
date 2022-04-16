@@ -1,6 +1,8 @@
 package com.id.ervin.genshin.paimondex.di
 
 import com.id.ervin.genshin.paimondex.ui.feature.characters.detail.CharacterDetailViewModel
+import com.id.ervin.genshin.paimondex.ui.feature.characters.favorite.FavoriteFragment
+import com.id.ervin.genshin.paimondex.ui.feature.characters.favorite.FavoriteViewModel
 import com.id.ervin.genshin.paimondex.ui.feature.characters.list.CharactersAdapter
 import com.id.ervin.genshin.paimondex.ui.feature.characters.list.CharactersFragment
 import com.id.ervin.genshin.paimondex.ui.feature.characters.list.CharactersViewModel
@@ -12,6 +14,15 @@ import org.koin.dsl.module
 val charactersFeatureModule = module {
     viewModel { CharactersViewModel(get()) }
     scope(named<CharactersFragment>()) {
+        scoped { (action: BaseRvCallback) ->
+            CharactersAdapter(action)
+        }
+    }
+}
+
+val favoriteCharacterFeatureModule = module {
+    viewModel { FavoriteViewModel(get()) }
+    scope(named<FavoriteFragment>()) {
         scoped { (action: BaseRvCallback) ->
             CharactersAdapter(action)
         }

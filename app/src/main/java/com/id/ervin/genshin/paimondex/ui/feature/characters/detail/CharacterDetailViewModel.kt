@@ -23,19 +23,19 @@ class CharacterDetailViewModel(private val repository: CharactersRepository) : V
 
     fun saveOrUpdateCharacter(charName: String, isFavorite: Boolean) {
         viewModelScope.launch {
-            repository.addOrUpdateFavoriteCharacter(charName, isFavorite)
+            repository.addOrUpdateLocalFavoriteCharacter(charName, isFavorite)
         }
     }
 
     fun fetchCharacterDetail(charName: String) {
         viewModelScope.launch {
-            _detailState.value = repository.getDetailCharacter(charName)
+            _detailState.value = repository.getRemoteDetailCharacter(charName)
         }
     }
 
     fun getCharacter(charName: String) {
         viewModelScope.launch {
-            _character.value = repository.getCharacterBrief(charName)
+            _character.value = repository.getLocalBriefCharacter(charName)
         }
     }
 }

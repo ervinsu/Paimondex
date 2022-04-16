@@ -7,7 +7,7 @@ class GenshinLocalService(private val paimondexDao: PaimondexDao) {
     suspend fun postFavoriteCharacter(character: CharacterBriefEntity) =
         paimondexDao.insertFavoriteCharacter(character)
 
-    fun getAllFavoriteCharacters() = paimondexDao.getAllCharacters()
+    fun getAllFavoriteCharacters() = paimondexDao.getAllFavoriteCharacters()
 
-    fun getCharacter(charName: String) = paimondexDao.getCharacter(charName)
+    fun getCharacter(charName: String) = paimondexDao.getFavoriteCharacter(charName)
 }

@@ -58,7 +58,7 @@ class CharactersFragment : ScopeFragment(), BaseRvCallback {
 
     private fun initObserver() {
         val progressBar: ProgressBar = binding.pbLoading
-        charactersViewModel.homeState.observe(viewLifecycleOwner, { homeState ->
+        charactersViewModel.charactersState.observe(viewLifecycleOwner, { homeState ->
             if (homeState.isLoading) progressBar.visible() else progressBar.gone()
             adapter.setCharacters(homeState.characters)
         })

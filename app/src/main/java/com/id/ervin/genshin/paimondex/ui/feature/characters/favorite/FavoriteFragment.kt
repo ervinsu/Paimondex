@@ -1,18 +1,32 @@
 package com.id.ervin.genshin.paimondex.ui.feature.characters.favorite
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.id.ervin.genshin.paimondex.databinding.FragmentGalleryBinding
+import android.widget.ProgressBar
+import androidx.recyclerview.widget.GridLayoutManager
+import com.id.ervin.genshin.paimondex.R
+import com.id.ervin.genshin.paimondex.databinding.FragmentCharactersBinding
+import com.id.ervin.genshin.paimondex.ui.feature.characters.detail.CharacterDetailActivity
+import com.id.ervin.genshin.paimondex.ui.feature.characters.list.CharactersAdapter
+import com.id.ervin.genshin.paimondex.util.BaseRvCallback
+import com.id.ervin.genshin.paimondex.util.calculateNoOfColumn
+import com.id.ervin.genshin.paimondex.util.gone
+import com.id.ervin.genshin.paimondex.util.visible
+import org.koin.android.scope.ScopeFragment
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
-class FavoriteFragment : Fragment() {
+class FavoriteFragment : ScopeFragment(), BaseRvCallback {
 
-    private lateinit var favoriteViewModel: FavoriteViewModel
-    private var _binding: FragmentGalleryBinding? = null
+    private val favoriteViewModel: FavoriteViewModel by viewModel()
+    private val adapter: CharactersAdapter by inject {
+        parametersOf(this)
+    }
+    private var _binding: FragmentCharactersBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -23,21 +37,44 @@ class FavoriteFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        favoriteViewModel =
-            ViewModelProvider(this).get(FavoriteViewModel::class.java)
+        _binding = FragmentCharactersBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        _binding = FragmentGalleryBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initRecyclerview()
+        initObserver()
+    }
 
-        val textView: TextView = binding.textGallery
-        favoriteViewModel.text.observe(viewLifecycleOwner, {
-            textView.text = it
+    private fun initObserver() {
+        val progressBar: ProgressBar = binding.pbLoading
+        favoriteViewModel.favoriteState.observe(viewLifecycleOwner, { favoriteState ->
+            if (favoriteState.loadingState.isLoading) progressBar.visible() else progressBar.gone()
+            adapter.setCharacters(favoriteState.listLocalCharacter)
         })
-        return root
+    }
+
+    private fun initRecyclerview() {
+        val recyclerview = binding.rvCharacters
+        recyclerview.adapter = adapter
+        val context = requireContext().applicationContext
+        val rowSpan =
+            context.calculateNoOfColumn(resources.getDimensionPixelSize(R.dimen.list_character_width) / resources.displayMetrics.scaledDensity)
+        val layoutManager = GridLayoutManager(context, rowSpan)
+        recyclerview.layoutManager = layoutManager
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onItemViewClicked(charName: String, view: View, activity: Activity) {
+        val intent = Intent(activity, CharacterDetailActivity::class.java).apply {
+            putExtra(CharacterDetailActivity.CHARACTER_EXTRA, charName)
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+        activity.startActivity(intent)
     }
 }

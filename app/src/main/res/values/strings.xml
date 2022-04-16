@@ -8,7 +8,7 @@
     <string name="action_bookmark">Bookmark</string>
 
     <string name="menu_characters">Characters</string>
-    <string name="menu_gallery">Gallery</string>
+    <string name="menu_favorite">Favorite Characters</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="rarity">Rarity</string>
     <string name="weapon">Weapon</string>

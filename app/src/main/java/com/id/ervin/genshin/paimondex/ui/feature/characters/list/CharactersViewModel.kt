@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.id.ervin.genshin.paimondex.data.state.HomeState
+import com.id.ervin.genshin.paimondex.data.state.CharactersState
 import com.id.ervin.genshin.paimondex.ui.feature.characters.CharactersRepository
 import kotlinx.coroutines.launch
 
@@ -12,13 +12,13 @@ class CharactersViewModel(
     private val repository: CharactersRepository
 ) : ViewModel() {
 
-    private val _homeState: MutableLiveData<HomeState> = MutableLiveData()
+    private val _charactersState: MutableLiveData<CharactersState> = MutableLiveData()
 
-    val homeState: LiveData<HomeState> = _homeState
+    val charactersState: LiveData<CharactersState> = _charactersState
 
     fun getCharacters() {
         viewModelScope.launch {
-            _homeState.value = HomeState(false, repository.getBriefCharacters())
+            _charactersState.value = CharactersState(false, repository.getRemoteBriefCharacters())
         }
     }
 }
