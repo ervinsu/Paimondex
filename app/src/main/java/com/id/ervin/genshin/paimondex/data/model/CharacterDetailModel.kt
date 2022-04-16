@@ -14,5 +14,6 @@ data class CharacterDetailModel(
     val description: String = "",
     val imageCardUrl: String = "",
     val talents: List<CharacterTalentModel> = listOf(),
-    val constellations: List<CharacterTalentModel> = listOf()
+    val constellations: List<CharacterTalentModel> = listOf(),
+    val isFavorite: Boolean = false
 )

@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.id.ervin.genshin.paimondex.ui.feature.gallery.GalleryFragment"
+        android:name="com.id.ervin.genshin.paimondex.ui.feature.characters.favorite.FavoriteFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 

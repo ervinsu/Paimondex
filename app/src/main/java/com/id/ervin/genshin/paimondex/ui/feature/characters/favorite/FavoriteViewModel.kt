@@ -1,10 +1,10 @@
-package com.id.ervin.genshin.paimondex.ui.feature.gallery
+package com.id.ervin.genshin.paimondex.ui.feature.characters.favorite
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class GalleryViewModel : ViewModel() {
+class FavoriteViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is gallery Fragment"

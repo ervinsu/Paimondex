@@ -1,4 +1,4 @@
-package com.id.ervin.genshin.paimondex.ui.feature.gallery
+package com.id.ervin.genshin.paimondex.ui.feature.characters.favorite
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.id.ervin.genshin.paimondex.databinding.FragmentGalleryBinding
 
-class GalleryFragment : Fragment() {
+class FavoriteFragment : Fragment() {
 
-    private lateinit var galleryViewModel: GalleryViewModel
+    private lateinit var favoriteViewModel: FavoriteViewModel
     private var _binding: FragmentGalleryBinding? = null
 
     // This property is only valid between onCreateView and
@@ -23,14 +23,14 @@ class GalleryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        galleryViewModel =
-            ViewModelProvider(this).get(GalleryViewModel::class.java)
+        favoriteViewModel =
+            ViewModelProvider(this).get(FavoriteViewModel::class.java)
 
         _binding = FragmentGalleryBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textGallery
-        galleryViewModel.text.observe(viewLifecycleOwner, {
+        favoriteViewModel.text.observe(viewLifecycleOwner, {
             textView.text = it
         })
         return root

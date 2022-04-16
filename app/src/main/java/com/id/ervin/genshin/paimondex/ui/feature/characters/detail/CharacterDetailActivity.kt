@@ -2,9 +2,11 @@ package com.id.ervin.genshin.paimondex.ui.feature.characters.detail
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.id.ervin.genshin.paimondex.R
 import com.id.ervin.genshin.paimondex.data.model.CharacterBriefModel
 import com.id.ervin.genshin.paimondex.databinding.ActivityCharacterDetailBinding
@@ -18,19 +20,20 @@ class CharacterDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCharacterDetailBinding
     private lateinit var view: View
     private val charDetailViewModel: CharacterDetailViewModel by viewModel()
-    private lateinit var characterName: String
+    private lateinit var characterBriefModel: CharacterBriefModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCharacterDetailBinding.inflate(layoutInflater)
         view = binding.root
         setContentView(view)
-
-        characterName =
-            intent.getParcelableExtra<CharacterBriefModel>(CHARACTER_EXTRA)?.name ?: return
-        initCharacterObserver(characterName)
         initToolbar()
-        initBinding(characterName)
+
+        characterBriefModel =
+            intent.getParcelableExtra<CharacterBriefModel>(CHARACTER_EXTRA)?.apply {
+                initCharacterObserver(name)
+                initBinding(name)
+            } ?: return
     }
 
     private fun initBinding(characterName: String) {
@@ -90,15 +93,40 @@ class CharacterDetailActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
+        binding.detailToolbar.inflateMenu(R.menu.character_detail)
         setSupportActionBar(binding.detailToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.character_detail, menu)
+        setBookmark(characterBriefModel)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            onBackPressed()
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+
+            }
+            R.id.action_bookmark -> {
+                characterBriefModel = characterBriefModel.copy(
+                    isFavorite = !characterBriefModel.isFavorite
+                )
+                setBookmark(characterBriefModel)
+            }
         }
-        return super.onOptionsItemSelected(item)
+        return true
+    }
+
+    private fun setBookmark(characterBriefModel: CharacterBriefModel) {
+        val menu = binding.detailToolbar.menu.getItem(0)
+        if (!characterBriefModel.isFavorite) {
+            menu.icon = ContextCompat.getDrawable(this, R.drawable.ic_bookmark_border)
+        } else {
+            menu.icon = ContextCompat.getDrawable(this, R.drawable.ic_bookmark)
+        }
     }
 
     companion object {

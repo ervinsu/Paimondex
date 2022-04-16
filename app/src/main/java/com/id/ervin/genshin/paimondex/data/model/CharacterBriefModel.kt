@@ -7,4 +7,5 @@ import kotlinx.android.parcel.Parcelize
 data class CharacterBriefModel(
     val name: String = "",
     val pictureUrl: String = "",
+    val isFavorite: Boolean = false
 ) : Parcelable
