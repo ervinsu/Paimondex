@@ -61,13 +61,25 @@ class CharacterExpandableTalentCustomView @JvmOverloads constructor(
     }
 
     fun setTalents(talents: List<CharacterTalentModel>) {
-        if (talents.size < 6)
-            return
         binding.customViewFirstTalent.setTalent(talents[0])
         binding.customViewSecondTalent.setTalent(talents[1])
         binding.customViewThirdTalent.setTalent(talents[2])
         binding.customViewFourthTalent.setTalent(talents[3])
         binding.customViewFifthTalent.setTalent(talents[4])
-        binding.customViewSixthTalent.setTalent(talents[5])
+
+        when {
+            talents.size == 5 -> {
+                binding.customViewSixthTalent.gone()
+            }
+            talents.size == 6 -> {
+                binding.customViewSixthTalent.setTalent(talents[5])
+            }
+            talents.size > 6 -> {
+                binding.textTalent.gone()
+                binding.groupTalent.gone()
+                binding.imageExpandable.gone()
+            }
+        }
+
     }
 }
