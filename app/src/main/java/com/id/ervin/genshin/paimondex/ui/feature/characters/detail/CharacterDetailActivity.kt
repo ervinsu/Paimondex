@@ -72,15 +72,18 @@ class CharacterDetailActivity : AppCompatActivity() {
                 binding.customViewNation.setValue(region)
                 binding.customViewConsName.setValue(constellationName)
                 binding.imageCharacter.loadImage(imageCardUrl)
-                val transition = generateTransition(
+                val transitionColor = generateTransition(
                     resources.getColor(R.color.grey, theme),
                     Color.parseColor(element.hexColor)
                 )
                 binding.detailToolbar.apply {
-                    background = transition
+                    background = transitionColor
                     title = name
                 }
-                transition.startTransition(1000)
+                transitionColor.startTransition(1000)
+
+                binding.customViewTalents.setTalents(talents)
+                binding.customViewConstellations.setTalents(constellations)
             }
         })
         charDetailViewModel.fetchCharacterDetail(characterName)

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_talent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_margin"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="talent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_expandable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:src="@drawable/ic_arrow_down"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.id.ervin.genshin.paimondex.ui.custom.CharacterTalentCustomView
+        android:id="@+id/customView_firstTalent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_margin"
+        app:layout_constraintTop_toBottomOf="@id/text_talent" />
+
+    <com.id.ervin.genshin.paimondex.ui.custom.CharacterTalentCustomView
+        android:id="@+id/customView_secondTalent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_margin"
+        app:layout_constraintTop_toBottomOf="@id/customView_firstTalent" />
+
+    <com.id.ervin.genshin.paimondex.ui.custom.CharacterTalentCustomView
+        android:id="@+id/customView_thirdTalent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_margin"
+        app:layout_constraintTop_toBottomOf="@id/customView_secondTalent" />
+
+    <com.id.ervin.genshin.paimondex.ui.custom.CharacterTalentCustomView
+        android:id="@+id/customView_fourthTalent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_margin"
+        app:layout_constraintTop_toBottomOf="@id/customView_thirdTalent" />
+
+    <com.id.ervin.genshin.paimondex.ui.custom.CharacterTalentCustomView
+        android:id="@+id/customView_fifthTalent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_margin"
+        app:layout_constraintTop_toBottomOf="@id/customView_fourthTalent" />
+
+    <com.id.ervin.genshin.paimondex.ui.custom.CharacterTalentCustomView
+        android:id="@+id/customView_sixthTalent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_margin"
+        app:layout_constraintTop_toBottomOf="@id/customView_fifthTalent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_talent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:constraint_referenced_ids="customView_firstTalent,customView_secondTalent,customView_thirdTalent,customView_fourthTalent,customView_fifthTalent,customView_sixthTalent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.id.ervin.genshin.paimondex.data.dto
 
 import com.id.ervin.genshin.paimondex.data.enum.Element
 import com.id.ervin.genshin.paimondex.data.model.CharacterDetailModel
+import com.id.ervin.genshin.paimondex.data.model.CharacterTalentModel
 import com.squareup.moshi.Json
 
 data class CharacterDetailDto(
@@ -17,7 +18,11 @@ data class CharacterDetailDto(
     @Json(name = "constellation")
     val constellationName: String = "",
     val description: String = "",
-) {
+    val skillTalents: List<CharacterTalentModel> = listOf(),
+    val passiveTalents: List<CharacterTalentModel> = listOf(),
+    val constellations: List<CharacterTalentModel> = listOf(),
+
+    ) {
     fun toModel(imageCardUrl: String): CharacterDetailModel {
         return CharacterDetailModel(
             name,
@@ -29,7 +34,9 @@ data class CharacterDetailDto(
             rarity,
             constellationName,
             description,
-            imageCardUrl
+            imageCardUrl,
+            skillTalents + passiveTalents,
+            constellations
         )
     }
 }

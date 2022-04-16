@@ -13,4 +13,6 @@ data class CharacterDetailModel(
     val constellationName: String = "",
     val description: String = "",
     val imageCardUrl: String = "",
+    val talents: List<CharacterTalentModel> = listOf(),
+    val constellations: List<CharacterTalentModel> = listOf()
 )

@@ -3,4 +3,8 @@
     <declare-styleable name="CharacterDetailCustomView">
         <attr name="variable" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="CharacterExpandableTalentCustomView">
+        <attr name="headerText" format="string" />
+    </declare-styleable>
 </resources>
