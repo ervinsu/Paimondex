@@ -67,17 +67,12 @@ class CharacterExpandableTalentCustomView @JvmOverloads constructor(
         binding.customViewFourthTalent.setTalent(talents[3])
         binding.customViewFifthTalent.setTalent(talents[4])
 
-        when {
-            talents.size == 5 -> {
+        when (talents.size) {
+            5 -> {
                 binding.customViewSixthTalent.gone()
             }
-            talents.size == 6 -> {
+            6 -> {
                 binding.customViewSixthTalent.setTalent(talents[5])
-            }
-            talents.size > 6 -> {
-                binding.textTalent.gone()
-                binding.groupTalent.gone()
-                binding.imageExpandable.gone()
             }
         }
 
