@@ -4,7 +4,6 @@ import com.id.ervin.genshin.paimondex.data.entity.CharacterBriefEntity
 import com.id.ervin.genshin.paimondex.data.model.CharacterBriefModel
 import com.id.ervin.genshin.paimondex.data.state.CharDetailState
 import com.id.ervin.genshin.paimondex.data.state.CharactersState
-import com.id.ervin.genshin.paimondex.data.state.FavoriteState
 import com.id.ervin.genshin.paimondex.data.state.LoadingState
 import com.id.ervin.genshin.paimondex.db.GenshinLocalService
 import com.id.ervin.genshin.paimondex.network.GenshinApiService
@@ -52,21 +51,21 @@ class CharactersRepository(
 
     fun getLocalBriefCharacters() = flow {
         try {
-            emit(FavoriteState(LoadingState(isLoading = true, isConnectionError = true)))
+            emit(CharactersState(LoadingState(isLoading = true, isConnectionError = true)))
 
             emitAll(
                 genshinLocalService.getAllFavoriteCharacters().map {
                     val characterList = it.map { char ->
                         CharacterBriefModel(char.name, char.isFavorite)
                     }
-                    FavoriteState(
-                        LoadingState(isLoading = false, isConnectionError = false),
+                    CharactersState(
+                        LoadingState(),
                         characterList
                     )
                 })
         } catch (e: Exception) {
             // TODO LOG
-            emit(FavoriteState(LoadingState(isLoading = false, isConnectionError = true)))
+            emit(CharactersState(LoadingState(isConnectionError = true)))
         }
     }
 

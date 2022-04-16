@@ -13,7 +13,7 @@ class CharacterDetailCustomView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : LinearLayout(context, attrs, defStyle) {
-    private var binding: CharacterDetailCustomViewBinding =
+    private val binding: CharacterDetailCustomViewBinding =
         CharacterDetailCustomViewBinding.inflate(
             LayoutInflater.from(context),
             this,

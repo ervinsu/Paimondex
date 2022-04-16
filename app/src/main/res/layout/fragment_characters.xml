@@ -13,10 +13,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.id.ervin.genshin.paimondex.ui.custom.InternetErrorCustomView
         android:id="@+id/customView_internet_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <com.id.ervin.genshin.paimondex.ui.custom.InternetErrorCustomView
+        android:id="@+id/customView_empty_error"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />
@@ -27,5 +34,6 @@
         android:layout_height="match_parent"
         app:spanCount="2"
         tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:visibility="gone"
         tools:listitem="@layout/character_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>

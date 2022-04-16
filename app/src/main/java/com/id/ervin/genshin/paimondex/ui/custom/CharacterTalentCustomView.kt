@@ -11,7 +11,7 @@ class CharacterTalentCustomView(
     context: Context,
     attrs: AttributeSet? = null
 ) : ConstraintLayout(context, attrs) {
-    private var binding: CharacterTalentCustomViewBinding =
+    private val binding: CharacterTalentCustomViewBinding =
         CharacterTalentCustomViewBinding.inflate(
             LayoutInflater.from(context),
             this,

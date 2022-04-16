@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import androidx.recyclerview.widget.GridLayoutManager
 import com.id.ervin.genshin.paimondex.R
 import com.id.ervin.genshin.paimondex.databinding.FragmentCharactersBinding
@@ -15,6 +14,7 @@ import com.id.ervin.genshin.paimondex.ui.feature.characters.list.CharactersAdapt
 import com.id.ervin.genshin.paimondex.util.BaseRvCallback
 import com.id.ervin.genshin.paimondex.util.calculateNoOfColumn
 import com.id.ervin.genshin.paimondex.util.gone
+import com.id.ervin.genshin.paimondex.util.showContentIfNotLoadingAndNotError
 import com.id.ervin.genshin.paimondex.util.visible
 import org.koin.android.scope.ScopeFragment
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -48,10 +48,21 @@ class FavoriteFragment : ScopeFragment(), BaseRvCallback {
     }
 
     private fun initObserver() {
-        val progressBar: ProgressBar = binding.pbLoading
         favoriteViewModel.favoriteState.observe(viewLifecycleOwner, { favoriteState ->
-            if (favoriteState.loadingState.isLoading) progressBar.visible() else progressBar.gone()
-            adapter.setCharacters(favoriteState.listLocalCharacter)
+            showContentIfNotLoadingAndNotError(
+                favoriteState.loadingState,
+                binding.rvCharacters,
+                binding.pbLoading,
+                binding.customViewInternetError
+            )
+            if (favoriteState.characters.isEmpty()) {
+                binding.customViewEmptyError.setAsEmptyError()
+                binding.customViewEmptyError.visible()
+            } else {
+                binding.customViewEmptyError.gone()
+            }
+
+            adapter.setCharacters(favoriteState.characters)
         })
     }
 

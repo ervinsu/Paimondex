@@ -5,13 +5,16 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.res.ResourcesCompat
+import com.id.ervin.genshin.paimondex.R
 import com.id.ervin.genshin.paimondex.databinding.InternetErrorCustomViewBinding
+import com.id.ervin.genshin.paimondex.util.gone
 
 class InternetErrorCustomView(
     context: Context,
     attrs: AttributeSet? = null
 ) : ConstraintLayout(context, attrs) {
-    private var binding: InternetErrorCustomViewBinding =
+    private val binding: InternetErrorCustomViewBinding =
         InternetErrorCustomViewBinding.inflate(
             LayoutInflater.from(context),
             this,
@@ -22,5 +25,13 @@ class InternetErrorCustomView(
         binding.buttonRetry.setOnClickListener {
             action(it)
         }
+    }
+
+    fun setAsEmptyError() {
+        binding.buttonRetry.gone()
+        binding.imagePaimonError.background =
+            ResourcesCompat.getDrawable(resources, R.drawable.paimon_shock, context?.theme)
+        binding.textPaimonError.text =
+            resources.getString(R.string.paimon_favorite_empty)
     }
 }
