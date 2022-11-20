@@ -21,6 +21,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="itemIconTint">@color/bnv_tab_item_foreground</item>
+        <item name="itemTextColor">@color/bnv_tab_item_foreground</item>
+        <item name="backgroundTint">@color/white</item>
+    </style>
+
     <style name="Theme.Paimondex.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Paimondex.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

@@ -56,7 +56,7 @@ class CharactersFragment : ScopeFragment(), BaseRvCallback {
     }
 
     private fun initObserver() {
-        charactersViewModel.charactersState.observe(viewLifecycleOwner, { homeState ->
+        charactersViewModel.charactersState.observe(viewLifecycleOwner) { homeState ->
             showContentIfNotLoadingAndNotError(
                 homeState.loadingState,
                 binding.rvCharacters,
@@ -65,7 +65,7 @@ class CharactersFragment : ScopeFragment(), BaseRvCallback {
             )
             if (homeState.characters.isEmpty()) return@observe
             adapter.setCharacters(homeState.characters)
-        })
+        }
     }
 
     private fun initRetryOnError() {

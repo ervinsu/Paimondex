@@ -48,7 +48,7 @@ class FavoriteFragment : ScopeFragment(), BaseRvCallback {
     }
 
     private fun initObserver() {
-        favoriteViewModel.favoriteState.observe(viewLifecycleOwner, { favoriteState ->
+        favoriteViewModel.favoriteState.observe(viewLifecycleOwner) { favoriteState ->
             showContentIfNotLoadingAndNotError(
                 favoriteState.loadingState,
                 binding.rvCharacters,
@@ -63,7 +63,7 @@ class FavoriteFragment : ScopeFragment(), BaseRvCallback {
             }
 
             adapter.setCharacters(favoriteState.characters)
-        })
+        }
     }
 
     private fun initRecyclerview() {
