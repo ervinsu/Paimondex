@@ -82,7 +82,7 @@ class CharactersFragment : ScopeFragment(), BaseRvCallback {
 
     override fun onItemViewClicked(charName: String, view: View, activity: Activity) {
         with(activity as MainActivity) {
-            binding.mlMain.transitionToEnd()
+            binding.mlMain.transitionToState(R.id.detail)
             upgradeToolbar(charName)
             initRetryOnError(charactersFragmentViewModel, charName)
             charactersFragmentViewModel.fetchCharacterDetail(charName)

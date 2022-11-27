@@ -3,9 +3,65 @@
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
-        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetEnd="@+id/detail"
         motion:constraintSetStart="@id/start"
-        motion:duration="500"></Transition>
+        motion:duration="350" />
+
+    <Transition
+        motion:constraintSetEnd="@id/swipeLeft"
+        motion:constraintSetStart="@id/detail"
+        motion:duration="100">
+
+        <OnSwipe
+            motion:dragDirection="dragLeft"
+            motion:onTouchUp="autoComplete"
+            motion:touchAnchorSide="left" />
+
+        <KeyFrameSet>
+
+            <KeyPosition
+                motion:drawPath="path"
+                motion:framePosition="50"
+                motion:keyPositionType="pathRelative"
+                motion:motionTarget="@id/cl_detail"
+                motion:percentX="0.5"
+                motion:percentY="0.1" />
+        </KeyFrameSet>
+    </Transition>
+
+    <Transition
+        motion:constraintSetEnd="@id/swipeRight"
+        motion:constraintSetStart="@id/detail"
+        motion:duration="100">
+
+        <OnSwipe
+            motion:dragDirection="dragRight"
+            motion:onTouchUp="autoComplete"
+            motion:touchAnchorSide="right" />
+
+        <KeyFrameSet>
+
+            <KeyPosition
+                motion:drawPath="path"
+                motion:framePosition="50"
+                motion:keyPositionType="pathRelative"
+                motion:motionTarget="@id/cl_detail"
+                motion:percentX="0.5"
+                motion:percentY="-0.1" />
+        </KeyFrameSet>
+    </Transition>
+
+    <Transition
+        motion:autoTransition="animateToEnd"
+        motion:constraintSetEnd="@id/offScreenLeft"
+        motion:constraintSetStart="@id/swipeLeft"
+        motion:duration="100" />
+
+    <Transition
+        motion:autoTransition="animateToEnd"
+        motion:constraintSetEnd="@id/offScreenRight"
+        motion:constraintSetStart="@id/swipeRight"
+        motion:duration="100" />
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
@@ -28,24 +84,105 @@
             android:layout_height="1dp" />
     </ConstraintSet>
 
-    <ConstraintSet android:id="@+id/end">
+    <ConstraintSet android:id="@+id/detail">
         <Constraint
             android:id="@+id/bnv_menu"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             motion:layout_constraintBottom_toBottomOf="parent" />
+
         <Constraint
             android:id="@+id/cl_detail"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:alpha="1"
-            android:visibility="visible"
             motion:layout_constraintBottom_toTopOf="@id/bnv_menu"
             motion:layout_constraintTop_toBottomOf="@id/toolbar" />
+
         <Constraint
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:alpha="1" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/swipeLeft"
+        motion:deriveConstraintsFrom="@id/detail">
+
+        <Constraint
+            android:id="@id/cl_detail"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="200dp"
+            android:layout_marginBottom="80dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintWidth_percent="0.7" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/swipeRight"
+        motion:deriveConstraintsFrom="@id/detail">
+
+        <Constraint
+            android:id="@id/cl_detail"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="80dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintWidth_percent="0.7" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/offScreenRight"
+        motion:deriveConstraintsFrom="@id/swipeRight">
+        <Constraint
+            android:id="@+id/bnv_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="1"
+            motion:layout_constraintBottom_toBottomOf="parent" />
+        <Constraint
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+        <Constraint
+            android:id="@id/cl_detail"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="80dp"
+            motion:layout_constraintStart_toEndOf="parent"
+            motion:layout_constraintWidth_percent="0.7" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/offScreenLeft"
+        motion:deriveConstraintsFrom="@id/swipeLeft">
+        <Constraint
+            android:id="@+id/bnv_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="1"
+            motion:layout_constraintBottom_toBottomOf="parent" />
+        <Constraint
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+        <Constraint
+            android:id="@id/cl_detail"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="500dp"
+            android:layout_marginBottom="80dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintWidth_percent="0.7" />
     </ConstraintSet>
 </MotionScene>

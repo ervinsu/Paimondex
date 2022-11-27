@@ -1,5 +1,6 @@
 package com.id.ervin.genshin.paimondex.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     val charactersViewModel: CharactersViewModel by viewModel()
     var characterBriefModel = CharacterBriefModel()
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,6 +35,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val navView: BottomNavigationView = binding.bnvMenu
 
+        binding.nestedScrollViewContent.setOnTouchListener { _, event ->
+            binding.mlMain.onTouchEvent(event)
+            return@setOnTouchListener false
+        }
+
+        binding.toolbar.setOnTouchListener { _, event ->
+            binding.mlMain.onTouchEvent(event)
+            return@setOnTouchListener false
+        }
         binding.mlMain.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(
                 motionLayout: MotionLayout?,
@@ -122,7 +133,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (transitionComplete) {
-            binding.mlMain.transitionToStart()
+            binding.mlMain.transitionToState(R.id.start)
             transitionComplete = false
         } else {
             super.onBackPressed()
