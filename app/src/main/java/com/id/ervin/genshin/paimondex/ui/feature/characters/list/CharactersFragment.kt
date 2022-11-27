@@ -1,7 +1,6 @@
 package com.id.ervin.genshin.paimondex.ui.feature.characters.list
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.id.ervin.genshin.paimondex.R
 import com.id.ervin.genshin.paimondex.databinding.FragmentCharactersBinding
-import com.id.ervin.genshin.paimondex.ui.feature.characters.detail.CharacterDetailActivity
+import com.id.ervin.genshin.paimondex.ui.MainActivity
 import com.id.ervin.genshin.paimondex.util.BaseRvCallback
 import com.id.ervin.genshin.paimondex.util.calculateNoOfColumn
 import com.id.ervin.genshin.paimondex.util.showContentIfNotLoadingAndNotError
@@ -18,7 +17,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class CharactersFragment : ScopeFragment(), BaseRvCallback {
-    private val charactersViewModel: CharactersViewModel by viewModel()
+    private val charactersFragmentViewModel: CharactersViewModel by viewModel()
     private val adapter: CharactersAdapter by inject {
         parametersOf(this)
     }
@@ -42,7 +41,9 @@ class CharactersFragment : ScopeFragment(), BaseRvCallback {
         initRecyclerview()
         initObserver()
         initRetryOnError()
-        charactersViewModel.getCharacters()
+        (activity as MainActivity).initDetailCharacterObserver(charactersFragmentViewModel)
+        (activity as MainActivity).initFavoriteCharacterObserver(charactersFragmentViewModel)
+        charactersFragmentViewModel.getCharacters()
     }
 
     private fun initRecyclerview() {
@@ -56,7 +57,7 @@ class CharactersFragment : ScopeFragment(), BaseRvCallback {
     }
 
     private fun initObserver() {
-        charactersViewModel.charactersState.observe(viewLifecycleOwner) { homeState ->
+        charactersFragmentViewModel.charactersState.observe(viewLifecycleOwner) { homeState ->
             showContentIfNotLoadingAndNotError(
                 homeState.loadingState,
                 binding.rvCharacters,
@@ -70,7 +71,7 @@ class CharactersFragment : ScopeFragment(), BaseRvCallback {
 
     private fun initRetryOnError() {
         binding.customViewInternetError.setRetryAction {
-            charactersViewModel.getCharacters()
+            charactersFragmentViewModel.getCharacters()
         }
     }
 
@@ -80,10 +81,12 @@ class CharactersFragment : ScopeFragment(), BaseRvCallback {
     }
 
     override fun onItemViewClicked(charName: String, view: View, activity: Activity) {
-        val intent = Intent(activity, CharacterDetailActivity::class.java).apply {
-            putExtra(CharacterDetailActivity.CHARACTER_EXTRA, charName)
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        with(activity as MainActivity) {
+            binding.mlMain.transitionToEnd()
+            upgradeToolbar(charName)
+            initRetryOnError(charactersFragmentViewModel, charName)
+            charactersFragmentViewModel.fetchCharacterDetail(charName)
+            charactersFragmentViewModel.getCharacter(charName)
         }
-        activity.startActivity(intent)
     }
 }

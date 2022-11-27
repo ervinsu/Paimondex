@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ml_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/activity_main_scene"
     tools:context=".ui.MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:alpha="0" />
 
     <include
         android:id="@+id/app_bar_main"
@@ -12,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/bnv_menu"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bnv_menu"
@@ -20,6 +28,229 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:alpha="0"
         app:menu="@menu/activity_main_bnv" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_detail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/colorOnPrimary"
+        app:layout_constraintBottom_toTopOf="@id/bnv_menu"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scrollView_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/barrier_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="image_character,container_description" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/container_description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_one"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/image_character">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_description"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/small_margin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Her Excellency, the Almighty, Narukami Ogosho, who promised the people of Inazuma an unchanging Eternity." />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/layout_rarity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:orientation="horizontal"
+                        android:weightSum="3"
+                        app:layout_constraintTop_toBottomOf="@id/text_description">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.2"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/rarity"
+                                android:textAlignment="center"
+                                android:textStyle="bold" />
+
+                            <RatingBar
+                                android:id="@+id/rating_rarity"
+                                style="?android:attr/ratingBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:isIndicator="true"
+                                android:numStars="5"
+                                android:rating="4"
+                                android:scaleX="0.7"
+                                android:scaleY="0.7"
+                                android:stepSize="0.1" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/weapon"
+                                android:textAlignment="center"
+                                android:textStyle="bold" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/text_weapon"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAlignment="center"
+                                tools:text="Claymore" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.9"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/vision"
+                                android:textAlignment="center"
+                                android:textStyle="bold" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/text_vision"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAlignment="center"
+                                tools:text="Electro" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <com.id.ervin.genshin.paimondex.ui.custom.CharacterDetailCustomView
+                        android:id="@+id/customView_birthday"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/text_description"
+                        app:layout_constraintTop_toBottomOf="@id/layout_rarity"
+                        app:variable="@string/birthday" />
+
+                    <com.id.ervin.genshin.paimondex.ui.custom.CharacterDetailCustomView
+                        android:id="@+id/customView_consName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_margin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/text_description"
+                        app:layout_constraintTop_toBottomOf="@id/customView_birthday"
+                        app:variable="@string/constellation" />
+
+
+                    <com.id.ervin.genshin.paimondex.ui.custom.CharacterDetailCustomView
+                        android:id="@+id/customView_nation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_margin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/text_description"
+                        app:layout_constraintTop_toBottomOf="@id/customView_consName"
+                        app:variable="@string/nation" />
+
+                    <com.id.ervin.genshin.paimondex.ui.custom.CharacterDetailCustomView
+                        android:id="@+id/customView_affiliation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_margin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/text_description"
+                        app:layout_constraintTop_toBottomOf="@id/customView_nation"
+                        app:variable="@string/affiliation" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_character"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/small_margin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/guideline_one"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.id.ervin.genshin.paimondex.ui.custom.CharacterExpandableTalentCustomView
+                    android:id="@+id/customView_talents"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:headerText="@string/talents"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/barrier_one" />
+
+                <com.id.ervin.genshin.paimondex.ui.custom.CharacterExpandableTalentCustomView
+                    android:id="@+id/customView_constellations"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:headerText="@string/constellations"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/customView_talents" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.id.ervin.genshin.paimondex.ui.custom.InternetErrorCustomView
+            android:id="@+id/customView_internet_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/pb_character_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
