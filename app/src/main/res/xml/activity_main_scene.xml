@@ -26,6 +26,10 @@
                 motion:motionTarget="@id/cl_detail"
                 motion:percentX="0.5"
                 motion:percentY="0.1" />
+            <KeyAttribute
+                motion:motionTarget="@+id/cl_detail"
+                motion:framePosition="75"
+                android:rotation="-40" />
         </KeyFrameSet>
     </Transition>
 
@@ -48,20 +52,12 @@
                 motion:motionTarget="@id/cl_detail"
                 motion:percentX="0.5"
                 motion:percentY="-0.1" />
+            <KeyAttribute
+                motion:motionTarget="@+id/cl_detail"
+                motion:framePosition="75"
+                android:rotation="40" />
         </KeyFrameSet>
     </Transition>
-
-    <Transition
-        motion:autoTransition="animateToEnd"
-        motion:constraintSetEnd="@id/offScreenLeft"
-        motion:constraintSetStart="@id/swipeLeft"
-        motion:duration="100" />
-
-    <Transition
-        motion:autoTransition="animateToEnd"
-        motion:constraintSetEnd="@id/offScreenRight"
-        motion:constraintSetStart="@id/swipeRight"
-        motion:duration="100" />
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
@@ -110,12 +106,22 @@
         motion:deriveConstraintsFrom="@id/detail">
 
         <Constraint
+            android:id="@+id/bnv_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="1"
+            motion:layout_constraintBottom_toBottomOf="parent" />
+        <Constraint
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+        <Constraint
             android:id="@id/cl_detail"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="200dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginEnd="700dp"
+            android:layout_marginBottom="20dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintWidth_percent="0.7" />
@@ -126,63 +132,24 @@
         motion:deriveConstraintsFrom="@id/detail">
 
         <Constraint
+            android:id="@+id/bnv_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="1"
+            motion:layout_constraintBottom_toBottomOf="parent" />
+        <Constraint
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+        <Constraint
             android:id="@id/cl_detail"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="200dp"
+            android:layout_marginStart="700dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="20dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintWidth_percent="0.7" />
-    </ConstraintSet>
-
-    <ConstraintSet
-        android:id="@+id/offScreenRight"
-        motion:deriveConstraintsFrom="@id/swipeRight">
-        <Constraint
-            android:id="@+id/bnv_menu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="1"
-            motion:layout_constraintBottom_toBottomOf="parent" />
-        <Constraint
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="1dp" />
-        <Constraint
-            android:id="@id/cl_detail"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="80dp"
-            motion:layout_constraintStart_toEndOf="parent"
-            motion:layout_constraintWidth_percent="0.7" />
-    </ConstraintSet>
-
-    <ConstraintSet
-        android:id="@+id/offScreenLeft"
-        motion:deriveConstraintsFrom="@id/swipeLeft">
-        <Constraint
-            android:id="@+id/bnv_menu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="1"
-            motion:layout_constraintBottom_toBottomOf="parent" />
-        <Constraint
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="1dp" />
-        <Constraint
-            android:id="@id/cl_detail"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="500dp"
-            android:layout_marginBottom="80dp"
-            motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintWidth_percent="0.7" />
     </ConstraintSet>
 </MotionScene>
