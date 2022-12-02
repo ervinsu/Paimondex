@@ -41,16 +41,16 @@ class CharacterDetailActivity : AppCompatActivity() {
     }
 
     private fun initFavoriteCharacterObserver(characterName: String) {
-        charDetailViewModel.character.observe(this, {
+        charDetailViewModel.character.observe(this) {
             characterBriefModel = it
             setBookmark(it)
-        })
+        }
         charDetailViewModel.getCharacter(characterName)
 
     }
 
     private fun initDetailCharacterObserver(characterName: String) {
-        charDetailViewModel.detailState.observe(this, { state ->
+        charDetailViewModel.detailState.observe(this) { state ->
             showContentIfNotLoadingAndNotError(
                 state.loadingState,
                 binding.nestedScrollViewContent,
@@ -88,7 +88,7 @@ class CharacterDetailActivity : AppCompatActivity() {
                 binding.customViewTalents.setTalents(talents)
                 binding.customViewConstellations.setTalents(constellations)
             }
-        })
+        }
         charDetailViewModel.fetchCharacterDetail(characterName)
     }
 

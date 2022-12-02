@@ -43,6 +43,7 @@ fun showContentIfNotLoadingAndNotError(
     loadingView: View,
     errorView: View
 ) {
+    contentView.gone()
     if (loadingState.isConnectionError) {
         errorView.visible()
         loadingView.gone()

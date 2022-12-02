@@ -12,7 +12,7 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val charactersFeatureModule = module {
-    viewModel { CharactersViewModel(get()) }
+    single { CharactersViewModel(get()) }
     scope(named<CharactersFragment>()) {
         scoped { (action: BaseRvCallback) ->
             CharactersAdapter(action)

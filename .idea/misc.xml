@@ -3,6 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Work/experiment/Paimondex/app/src/main/res/layout/activity_character_detail.xml" value="0.26165146909827763" />
+        <entry key="..\:/Work/experiment/Paimondex/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Work/experiment/Paimondex/app/src/main/res/layout/app_bar_main.xml" value="0.26165146909827763" />
+        <entry key="..\:/Work/experiment/Paimondex/app/src/main/res/layout/character_detail_custom_view.xml" value="0.5380208333333333" />
+        <entry key="..\:/Work/experiment/Paimondex/app/src/main/res/layout/character_item.xml" value="0.2989583333333333" />
+        <entry key="..\:/Work/experiment/Paimondex/app/src/main/res/layout/content_main.xml" value="0.33" />
+        <entry key="..\:/Work/experiment/Paimondex/app/src/main/res/layout/fragment_characters.xml" value="0.2989583333333333" />
+        <entry key="..\:/Work/experiment/Paimondex/app/src/main/res/layout/internet_error_custom_view.xml" value="0.5380208333333333" />
+        <entry key="..\:/Work/experiment/Paimondex/app/src/main/res/layout/nav_header_main.xml" value="0.5380208333333333" />
+        <entry key="..\:/Work/experiment/Paimondex/app/src/main/res/layout/new_activity_main.xml" value="0.26403985507246375" />
+        <entry key="..\:/Work/experiment/Paimondex/app/src/main/res/menu/activity_main_bnv.xml" value="0.5369791666666667" />
+        <entry key="..\:/Work/experiment/Paimondex/app/src/main/res/menu/activity_main_drawer.xml" value="0.5380208333333333" />
+        <entry key="..\:/Work/experiment/Paimondex/app/src/main/res/menu/character_detail.xml" value="0.5380208333333333" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.13802083333333334" />
         <entry key="app/src/main/res/drawable/ic_baseline_person.xml" value="0.165625" />
         <entry key="app/src/main/res/drawable/ic_baseline_verified_user_24.xml" value="0.165625" />
@@ -35,6 +48,7 @@
       </map>
     </option>
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
