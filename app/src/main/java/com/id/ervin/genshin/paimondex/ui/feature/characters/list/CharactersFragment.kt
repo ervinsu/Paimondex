@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.id.ervin.genshin.paimondex.R
 import com.id.ervin.genshin.paimondex.databinding.FragmentCharactersBinding
@@ -41,8 +42,6 @@ class CharactersFragment : ScopeFragment(), BaseRvCallback {
         initRecyclerview()
         initObserver()
         initRetryOnError()
-        (activity as MainActivity).initDetailCharacterObserver(charactersFragmentViewModel)
-        (activity as MainActivity).initFavoriteCharacterObserver(charactersFragmentViewModel)
         charactersFragmentViewModel.getCharacters()
     }
 
@@ -84,7 +83,7 @@ class CharactersFragment : ScopeFragment(), BaseRvCallback {
         with(activity as MainActivity) {
             binding.mlMain.transitionToState(R.id.detail)
             upgradeToolbar(charName)
-            initRetryOnError(charactersFragmentViewModel, charName)
+            initRetryOnError(charName)
             charactersFragmentViewModel.fetchCharacterDetail(charName)
             charactersFragmentViewModel.getCharacter(charName)
         }

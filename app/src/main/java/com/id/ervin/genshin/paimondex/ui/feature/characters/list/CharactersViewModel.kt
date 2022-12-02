@@ -22,7 +22,6 @@ class CharactersViewModel(
     val character: LiveData<CharacterBriefModel> = _character
 
     private val _charactersState: MutableLiveData<CharactersState> = MutableLiveData()
-
     val charactersState: LiveData<CharactersState> = _charactersState
 
     fun getCharacters() {

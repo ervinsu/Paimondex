@@ -17,6 +17,11 @@ import com.id.ervin.genshin.paimondex.R
 import com.id.ervin.genshin.paimondex.data.model.CharacterBriefModel
 import com.id.ervin.genshin.paimondex.databinding.ActivityMainBinding
 import com.id.ervin.genshin.paimondex.ui.feature.characters.list.CharactersViewModel
+import com.id.ervin.genshin.paimondex.ui.feature.characters.list.initDetailCharacterObserver
+import com.id.ervin.genshin.paimondex.ui.feature.characters.list.initFavoriteCharacterObserver
+import com.id.ervin.genshin.paimondex.ui.feature.characters.list.initRetryOnError
+import com.id.ervin.genshin.paimondex.ui.feature.characters.list.upgradeToolbar
+import com.id.ervin.genshin.paimondex.util.createSnackBar
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -25,7 +30,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     private var transitionComplete = false
     val charactersViewModel: CharactersViewModel by viewModel()
-    var characterBriefModel = CharacterBriefModel()
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val navView: BottomNavigationView = binding.bnvMenu
 
-        binding.nestedScrollViewContent.setOnTouchListener { _, event ->
+        binding.clDetail.nestedScrollViewContent.setOnTouchListener { _, event ->
             binding.mlMain.onTouchEvent(event)
             return@setOnTouchListener false
         }
@@ -59,11 +63,29 @@ class MainActivity : AppCompatActivity() {
                 endId: Int,
                 progress: Float
             ) {
-                // do nothing
+               // do nothing
             }
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
-                transitionComplete = true
+                when (currentId) {
+                    R.id.detail -> { transitionComplete = true }
+                    R.id.swipeLeft, R.id.swipeRight -> {
+                        motionLayout?.progress = 0f
+                        motionLayout?.setTransition(R.id.detail, R.id.swipeRight)
+                        val charName =
+                            charactersViewModel.charactersState.value?.characters?.filter { it.name != charactersViewModel.character.value?.name }
+                                ?.random()?.name?: ""
+                        if(charName.isEmpty()){
+                            motionLayout?.transitionToState(R.id.start)
+                            binding.root.createSnackBar("Something wrong, back to menu", 5000)
+                            return
+                        }
+                        upgradeToolbar(charName)
+                        initRetryOnError(charName)
+                        charactersViewModel.fetchCharacterDetail(charName)
+                        charactersViewModel.getCharacter(charName)
+                    }
+                }
             }
 
             override fun onTransitionTrigger(
@@ -86,6 +108,12 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         initToolbar()
+        initObserver()
+    }
+
+    private fun initObserver(){
+        initDetailCharacterObserver()
+        initFavoriteCharacterObserver()
     }
 
     private fun initToolbar() {
@@ -103,7 +131,9 @@ class MainActivity : AppCompatActivity() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.action_bookmark -> {
-                        characterBriefModel = characterBriefModel.copy(
+                        val characterBriefModel =
+                            charactersViewModel.character.value ?: CharacterBriefModel()
+                        characterBriefModel.copy(
                             isFavorite = !characterBriefModel.isFavorite
                         ).apply {
                             charactersViewModel.saveOrUpdateCharacter(name, isFavorite)

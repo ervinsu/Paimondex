@@ -8,15 +8,13 @@ import com.id.ervin.genshin.paimondex.util.loadImage
 import com.id.ervin.genshin.paimondex.util.showContentIfNotLoadingAndNotError
 import java.util.Locale
 
-fun MainActivity.initDetailCharacterObserver(
-    charactersViewModel: CharactersViewModel
-) {
+fun MainActivity.initDetailCharacterObserver() {
     charactersViewModel.detailState.observe(this) { state ->
         showContentIfNotLoadingAndNotError(
             state.loadingState,
-            binding.nestedScrollViewContent,
-            binding.pbCharacterDetail,
-            binding.customViewInternetError
+            binding.clDetail.nestedScrollViewContent,
+            binding.clDetail.pbCharacterDetail,
+            binding.clDetail.customViewInternetError
         )
         if (state.character.name.isEmpty()) return@observe
 
@@ -27,24 +25,25 @@ fun MainActivity.initDetailCharacterObserver(
                 birthday.substring(5, birthday.count())
             else "-"
 
-            binding.textDescription.text = description
-            binding.ratingRarity.rating = rarity.toFloat()
-            binding.textWeapon.text = weaponType
-            binding.textVision.text = element.name
-            binding.customViewBirthday.setValue(birthday)
-            binding.customViewAffiliation.setValue(affiliation)
-            binding.customViewNation.setValue(region)
-            binding.customViewConsName.setValue(constellationName)
-            binding.imageCharacter.loadImage(imageCardUrl)
+            with(binding.clDetail){
+                textDescription.text = description
+                ratingRarity.rating = rarity.toFloat()
+                textWeapon.text = weaponType
+                textVision.text = element.name
+                customViewBirthday.setValue(birthday)
+                customViewAffiliation.setValue(affiliation)
+                customViewNation.setValue(region)
+                customViewConsName.setValue(constellationName)
+                imageCharacter.loadImage(imageCardUrl)
+                customViewTalents.setTalents(talents)
+                customViewConstellations.setTalents(constellations)
+            }
             val transitionColor = generateTransition(
                 resources.getColor(R.color.grey, theme),
                 Color.parseColor(element.hexColor)
             )
             binding.toolbar.background = transitionColor
             transitionColor.startTransition(1000)
-
-            binding.customViewTalents.setTalents(talents)
-            binding.customViewConstellations.setTalents(constellations)
         }
     }
 }
@@ -59,12 +58,9 @@ fun MainActivity.upgradeToolbar(
     }
 }
 
-fun MainActivity.initFavoriteCharacterObserver(
-    charactersViewModel: CharactersViewModel
-) {
+fun MainActivity.initFavoriteCharacterObserver() {
     charactersViewModel.character.observe(this) {
-        characterBriefModel = it
-        setBookmark(characterBriefModel)
+        setBookmark(it)
     }
 }
 
@@ -73,10 +69,9 @@ fun MainActivity.resetToolbar() {
 }
 
 fun MainActivity.initRetryOnError(
-    charactersViewModel: CharactersViewModel,
     characterName: String
 ) {
-    binding.customViewInternetError.setRetryAction {
+    binding.clDetail.customViewInternetError.setRetryAction {
         charactersViewModel.retryState(characterName)
     }
 }

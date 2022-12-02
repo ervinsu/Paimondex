@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.id.ervin.genshin.paimondex">
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".PaimondexApp"
@@ -12,12 +11,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Paimondex">
         <activity
-            android:theme="@style/Theme.Paimondex.NoActionBar"
-            android:name=".ui.feature.characters.detail.CharacterDetailActivity"
-            android:exported="true" />
-        <activity
+            android:name=".ui.SplashActivity"
             android:exported="true"
+            android:theme="@style/Theme.Paimondex.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".ui.feature.characters.detail.CharacterDetailActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Paimondex.NoActionBar" />
+        <activity
             android:name=".ui.MainActivity"
+            android:exported="true"
             android:theme="@style/Theme.Paimondex.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,5 +31,7 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
