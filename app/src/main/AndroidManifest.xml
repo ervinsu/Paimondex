@@ -11,22 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Paimondex">
         <activity
-            android:name=".ui.SplashActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Paimondex.NoActionBar">
-
-        </activity>
-        <activity
+            android:theme="@style/Theme.Paimondex.NoActionBar"
             android:name=".ui.feature.characters.detail.CharacterDetailActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Paimondex.NoActionBar" />
+            android:exported="true" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
+            android:label="@string/app_name"
             android:theme="@style/Theme.Paimondex.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
